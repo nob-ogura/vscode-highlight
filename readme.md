@@ -1,12 +1,12 @@
-# Highlight
+# Highlight Date
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/fabiospampinato/vscode-highlight/master/resources/logo.png" width="128" alt="Logo">
 </p>
 
-Advanced text highlighter based on regexes. Useful for todos, annotations, colors etc.
+Display a highlight based on the date string. I would like to express my respect and gratitude to [fabiospampinato](https://github.com/fabiospampinato) for creating the [original](https://github.com/fabiospampinato/vscode-highlight).
 
-There are alternative extensions that you may be considering, like [TODO Highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight), but this is more generic, this can apply different styles to different capturing groups within the same regex, and this is focused on doing only one thing and doing it _well_.
+There are alternative extensions that you may be considering, like [TODO Highlight Date](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight), but this is more generic, this can apply different styles to different capturing groups within the same regex, and this is focused on doing only one thing and doing it _well_.
 
 ## Install
 

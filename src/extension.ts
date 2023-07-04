@@ -12,7 +12,7 @@ import Decorator from './decorator';
 function activate ( context: vscode.ExtensionContext ) {
 
   beggar ({
-    id: 'vscode-highlight',
+    id: 'vscode-highlight-date',
     title: '𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁 - 𝗙𝘂𝗻𝗱𝗿𝗮𝗶𝘀𝗶𝗻𝗴 𝗔𝗻𝗻𝗼𝘂𝗻𝗰𝗲𝗺𝗲𝗻𝘁: We are collecting some money to allow for further development, if you find this extension useful please please please consider donating to it and be part of something amazing!',
     url: 'https://buy.stripe.com/cN2aGr1ND4Td7wQ00a',
     actions: {

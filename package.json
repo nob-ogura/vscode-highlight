@@ -1,19 +1,19 @@
 {
-  "name": "vscode-highlight",
-  "displayName": "Highlight",
-  "description": "Advanced text highlighter based on regexes. Useful for todos, annotations, colors etc.",
+  "name": "vscode-highlight-date",
+  "displayName": "Highlight Date",
+  "description": "Display a highlight based on the date string. I would like to express my respect and gratitude to fabiospampinato for creating the original.",
   "icon": "resources/logo-128x128.png",
-  "version": "1.7.2",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "out/extension.js",
-  "publisher": "fabiospampinato",
+  "publisher": "nob-ogura",
   "activationEvents": [
     "*"
   ],
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Highlight - Configuration",
+      "title": "Highlight Date - Configuration",
       "properties": {
         "highlight.decorations": {
           "type": "object",
@@ -54,7 +54,7 @@
     "test": "node ./node_modules/vscode/bin/test"
   },
   "bugs": {
-    "url": "https://github.com/fabiospampinato/vscode-highlight/issues"
+    "url": "https://github.com/nob-ogura/vscode-highlight-date/issues"
   },
   "author": {
     "name": "Fabio Spampinato",
@@ -62,7 +62,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fabiospampinato/vscode-highlight.git"
+    "url": "https://github.com/nob-ogura/vscode-highlight-date.git"
   },
   "engines": {
     "vscode": "^1.15.0"
