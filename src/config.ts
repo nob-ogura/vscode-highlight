@@ -6,6 +6,9 @@ import * as vscode from 'vscode';
 import RegexesDefaults from './config_regexes_defaults';
 
 const oneDay: number = (1000 * 60 * 60 * 24)
+const strikethrouhg: string = "[^~]"
+const prefix: string = `(${strikethrouhg}`
+const postfix: string = `${strikethrouhg})`
 
 const pad2Zero = function(n: number): string {return String(n).padStart(2, "0")}
 
@@ -24,7 +27,7 @@ const getPastDateRegex = function(dt: Date): string {
   const dtYear = dt.getFullYear()
   const dtMonth = dt.getMonth() + 1
   const dtDate = dt.getDate()
-  let dateRegex: string = "("
+  let dateRegex: string = `${prefix}(`
   // 年（～2100年）
   dateRegex += `(1\\d{3}|20[0-${lastTenPlace(dtYear) - 1}]\\d|20${lastTenPlace(dtYear)}[0-${lastOnePlace(dtYear)}])-\\d{2}-\\d{2}`
   // 月
@@ -55,17 +58,17 @@ const getPastDateRegex = function(dt: Date): string {
     // 31日
     dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-([0-2]\\d|3[0-${onePlace(dtDate)}]`
   }
-  dateRegex += ")"
+  dateRegex += `)${postfix}`
   return dateRegex
 }
 
 const getSerialDateRegex = function(dt: Date, start: number, end: number): string {
-  let dateRegex: string = "("
+  let dateRegex: string = `${prefix}(`
   for (let i = start; i < end; i++) {
     if (i > start) dateRegex += "|"
     dateRegex += formatDate(getNDaysLater(dt, i))
   }
-  dateRegex += ")"
+  dateRegex += `)${postfix}`
   return dateRegex
 }
 
