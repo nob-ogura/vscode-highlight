@@ -42,21 +42,21 @@ const getPastDateRegex = function(dt: Date): string {
     dateRegex += `|${dtYear}-(0\\d|1[0-${lastOnePlace(dtMonth)}])-\\d\\d`
   }
   // 日
-  if (dtMonth == 1) {
+  if (dtDate == 1) {
     // 1日
     // do nothing.
-  } else if (dtMonth < 11) {
-    // 2日～10日
-    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-0[1-${lastOnePlace(dtDate)}]`
-  } else if (dtMonth < 21) {
-    // 11日～20日
-    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-(0\\d|1[0-${lastOnePlace(dtDate)}]`
-  } else if (dtMonth < 31) {
-    // 21日～30日
-    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-([01]\\d|2[0-${lastOnePlace(dtDate)}]`
+  } else if (dtDate < 10) {
+    // 2日～9日
+    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-0[1-${onePlace(dtDate)}]`
+  } else if (dtDate < 20) {
+    // 10日～19日
+    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-(0\\d|1[0-${onePlace(dtDate)}])`
+  } else if (dtDate < 30) {
+    // 20日～29日
+    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-([01]\\d|2[0-${onePlace(dtDate)}])`
   } else {
-    // 31日
-    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-([0-2]\\d|3[0-${lastOnePlace(dtDate)}]`
+    // 30日～31日
+    dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-([0-2]\\d|3[0-${onePlace(dtDate)}])`
   }
   dateRegex += `)${postfix}`
   return dateRegex
