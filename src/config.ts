@@ -89,7 +89,18 @@ const makeRegexesObj = function() {
       },
     ],
   }
-  regexesObj[getSerialDateRegex(dt, 1, 5)] = {
+  regexesObj[getSerialDateRegex(dt, 1, 2)] = {
+    filterLanguageRegex: "Markdown",
+    decorations: [
+      {
+        "overviewRulerColor": "#ff9000",
+        "backgroundColor": "#ff9000",
+        "color": "#1f1f1f",
+        "fontWeight": "normal",
+      },
+    ],
+  }
+  regexesObj[getSerialDateRegex(dt, 2, 5)] = {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
