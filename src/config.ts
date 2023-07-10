@@ -19,6 +19,11 @@ const getNDaysLater = function(dt: Date, n: number): Date {
   return futureDate;
 }
 
+const getNDaysLaterDay = function(dt: Date, n: number): number {
+  const futureDay = getNDaysLater(dt, n).getDay()
+  return futureDay;
+}
+
 const onePlace = function (n: number): number {return n % 10}
 const lastOnePlace = function (n: number): number {return onePlace(n - 1)}
 const lastTenPlace = function (n: number): number {return Math.floor(((n - 1) / 10) % 10)}
@@ -89,7 +94,14 @@ const makeRegexesObj = function() {
       },
     ],
   }
-  regexesObj[getSerialDateRegex(dt, 1, 2)] = {
+  const DayOfTommorow = getNDaysLaterDay(dt, 1)
+  let diff = 0
+  if (DayOfTommorow == 0) diff = 1
+  if (DayOfTommorow == 6) diff = 2
+  let end1 = 2 + diff
+  let end2 = 5 + diff
+  let end3 = 15 + diff
+  regexesObj[getSerialDateRegex(dt, 1, end1)] = {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
@@ -100,7 +112,7 @@ const makeRegexesObj = function() {
       },
     ],
   }
-  regexesObj[getSerialDateRegex(dt, 2, 5)] = {
+  regexesObj[getSerialDateRegex(dt, end1, end2)] = {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
@@ -111,7 +123,7 @@ const makeRegexesObj = function() {
       },
     ],
   }
-  regexesObj[getSerialDateRegex(dt, 5, 15)] = {
+  regexesObj[getSerialDateRegex(dt, end2, end3)] = {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
