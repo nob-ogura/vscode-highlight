@@ -47,11 +47,8 @@ const getPastDateRegex = function(dt: Date): string {
     dateRegex += `|${dtYear}-(0\\d|1[0-${lastOnePlace(dtMonth)}])-\\d\\d`
   }
   // 日
-  if (dtDate == 1) {
-    // 1日
-    // do nothing.
-  } else if (dtDate < 10) {
-    // 2日～9日
+  if (dtDate < 10) {
+    // 1日～9日
     dateRegex += `|${dtYear}-${pad2Zero(dtMonth)}-0[1-${onePlace(dtDate)}]`
   } else if (dtDate < 20) {
     // 10日～19日
