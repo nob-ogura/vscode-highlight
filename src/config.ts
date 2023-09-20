@@ -121,7 +121,7 @@ const makeRegexesObj = function () {
       {
         overviewRulerColor: "#ff0000",
         backgroundColor: "#ff0000",
-        color: "#ffff00",
+        color: "#ffffff",
         fontWeight: "bold",
       },
     ],
