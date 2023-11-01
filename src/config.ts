@@ -111,7 +111,7 @@ const makeRegexesObj = function () {
         overviewRulerColor: "#ff0000",
         backgroundColor: "#ff0000",
         color: "#ffffff",
-        fontWeight: "bold",
+        fontWeight: "normal",
       },
     ],
   };
@@ -119,8 +119,8 @@ const makeRegexesObj = function () {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
-        overviewRulerColor: "#ffff00",
-        backgroundColor: "#ffff00",
+        overviewRulerColor: "#ff9000",
+        backgroundColor: "#ff9000",
         color: "#1f1f1f",
         fontWeight: "bold",
       },
@@ -138,8 +138,8 @@ const makeRegexesObj = function () {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
-        overviewRulerColor: "#ff9000",
-        backgroundColor: "#ff9000",
+        overviewRulerColor: "#f0f000",
+        backgroundColor: "#f0f000",
         color: "#1f1f1f",
         fontWeight: "normal",
       },
