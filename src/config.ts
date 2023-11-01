@@ -110,18 +110,18 @@ const makeRegexesObj = function () {
       {
         overviewRulerColor: "#ff0000",
         backgroundColor: "#ff0000",
-        color: "#00cccc",
+        color: "#ffffff",
         fontWeight: "bold",
       },
     ],
   };
-  regexesObj[`(.${formatDate(today)}.)`] = {
+  regexesObj[`(${prefix}${formatDate(today)}${postfix})`] = {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
-        overviewRulerColor: "#ff0000",
-        backgroundColor: "#ff0000",
-        color: "#ffffff",
+        overviewRulerColor: "#ffff00",
+        backgroundColor: "#ffff00",
+        color: "#1f1f1f",
         fontWeight: "bold",
       },
     ],
