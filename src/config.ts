@@ -138,8 +138,8 @@ const makeRegexesObj = function () {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
-        overviewRulerColor: "#ffcc00",
-        backgroundColor: "#ffcc00",
+        overviewRulerColor: "#ffbc00",
+        backgroundColor: "#ffbc00",
         color: "#1f1f1f",
         fontWeight: "normal",
       },
