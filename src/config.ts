@@ -24,11 +24,6 @@ const getNDaysLater = function (dt: Date, n: number): Date {
   return futureDate;
 };
 
-const getNDaysLaterDay = function (dt: Date, n: number): number {
-  const futureDay = getNDaysLater(dt, n).getDay();
-  return futureDay;
-};
-
 const onePlace = function (n: number): number {
   return n % 10;
 };
@@ -97,6 +92,106 @@ const getSerialDateRegex = function (
   return dateRegex;
 };
 
+type Rgb = [number, number, number];
+type Hsl = [number, number, number];
+
+const RGBToHSL = (r: number, g: number, b: number): Hsl => {
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  let max = Math.max(r, g, b);
+  let min = Math.min(r, g, b);
+  let h = 0;
+  let s = 0;
+  let l = (max + min) / 2;
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    let diff = max - min;
+    s = l > 0.5 ? diff / (2 - max - min) : diff / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / diff + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / diff + 2;
+        break;
+      case b:
+        h = (r - g) / diff + 4;
+        break;
+    }
+    h /= 6;
+  }
+  return [h * 360, s * 100, l * 100];
+};
+
+const HSLToRGB = (h: number, s: number, l: number): Rgb => {
+  h /= 360;
+  s /= 100;
+  l /= 100;
+  let r, g, b;
+  if (s === 0) {
+    r = g = b = l; // achromatic
+  } else {
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    };
+    let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    let p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1 / 3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1 / 3);
+  }
+  return [r * 255, g * 255, b * 255];
+};
+
+const RGBToHex = (r: number, g: number, b: number): string => {
+  return (
+    "#" +
+    [r, g, b]
+      .map((x) => {
+        const hex = Math.round(x).toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+      })
+      .join("")
+  );
+};
+
+const hexToRGB = (hex: string): Rgb => {
+  let r = 0,
+    g = 0,
+    b = 0;
+  if (hex.length === 4) {
+    r = parseInt("0x" + hex[1] + hex[1]);
+    g = parseInt("0x" + hex[2] + hex[2]);
+    b = parseInt("0x" + hex[3] + hex[3]);
+  } else if (hex.length === 7) {
+    r = parseInt("0x" + hex[1] + hex[2]);
+    g = parseInt("0x" + hex[3] + hex[4]);
+    b = parseInt("0x" + hex[5] + hex[6]);
+  }
+  return [r, g, b];
+};
+
+const getHexColor = (originalColor: string, target: number): string => {
+  let rgb = hexToRGB(originalColor);
+  let hsl = RGBToHSL(...rgb);
+  hsl[0] += (target - 2) * 4;
+  if (hsl[0] > 360) {
+    hsl[0] -= 360;
+  } else if (hsl[0] < 0) {
+    hsl[0] += 360;
+  }
+  let newRGB = HSLToRGB(...hsl);
+  let newColor = RGBToHex(...newRGB);
+  return newColor;
+};
+
 const makeRegexesObj = function () {
   interface regexsClass {
     [prop: string]: any;
@@ -119,65 +214,29 @@ const makeRegexesObj = function () {
     filterLanguageRegex: "Markdown",
     decorations: [
       {
-        overviewRulerColor: "#ffaa00",
-        backgroundColor: "#ffaa00",
-        color: "#1f1f1f",
-        fontWeight: "bold",
-      },
-    ],
-  };
-  const DayOfTommorow = getNDaysLaterDay(today, 1);
-  let diff = 0;
-  if (DayOfTommorow == 0) diff = 1;
-  if (DayOfTommorow == 6) diff = 2;
-  let end1 = 2 + diff;
-  let end2 = 5 + diff;
-  let end3 = 15 + diff;
-  let end4 = 30 + diff;
-  regexesObj[getSerialDateRegex(today, 1, end1)] = {
-    filterLanguageRegex: "Markdown",
-    decorations: [
-      {
-        overviewRulerColor: "#e6e600",
-        backgroundColor: "#e6e600",
-        color: "#1f1f1f",
+        overviewRulerColor: "#ff4433",
+        backgroundColor: "#ff4433",
+        color: "#ffffff",
         fontWeight: "normal",
       },
     ],
   };
-  regexesObj[getSerialDateRegex(today, end1, end2)] = {
-    filterLanguageRegex: "Markdown",
-    decorations: [
-      {
-        overviewRulerColor: "#00cc00",
-        backgroundColor: "#00cc00",
-        color: "#1f1f1f",
-        fontWeight: "normal",
-      },
-    ],
-  };
-  regexesObj[getSerialDateRegex(today, end2, end3)] = {
-    filterLanguageRegex: "Markdown",
-    decorations: [
-      {
-        overviewRulerColor: "#00cccc",
-        backgroundColor: "#00cccc",
-        color: "#1f1f1f",
-        fontWeight: "normal",
-      },
-    ],
-  };
-  regexesObj[getSerialDateRegex(today, end3, end4)] = {
-    filterLanguageRegex: "Markdown",
-    decorations: [
-      {
-        overviewRulerColor: "#8080ff",
-        backgroundColor: "#8080ff",
-        color: "#1f1f1f",
-        fontWeight: "normal",
-      },
-    ],
-  };
+  let start = 1;
+  for (let end = 2; end < 80; end += start) {
+    const color = getHexColor("#ff8080", end);
+    regexesObj[getSerialDateRegex(today, start, end)] = {
+      filterLanguageRegex: "Markdown",
+      decorations: [
+        {
+          overviewRulerColor: color,
+          backgroundColor: color,
+          color: "#000000",
+          fontWeight: "normal",
+        },
+      ],
+    };
+    start = end - start;
+  }
   return regexesObj;
 };
 
