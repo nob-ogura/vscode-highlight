@@ -24,6 +24,11 @@ const getNDaysLater = function (dt: Date, n: number): Date {
   return futureDate;
 };
 
+const getNDaysLaterDay = function (dt: Date, n: number): number {
+  const futureDay = getNDaysLater(dt, n).getDay();
+  return futureDay;
+};
+
 const onePlace = function (n: number): number {
   return n % 10;
 };
@@ -221,8 +226,12 @@ const makeRegexesObj = function () {
       },
     ],
   };
+  let diff = 0;
+  const DayOfTommorow = getNDaysLaterDay(today, 1);
+  if (DayOfTommorow == 0) diff = 1;
+  if (DayOfTommorow == 6) diff = 2;
   let start = 1;
-  for (let end = 2; end < 80; end += start) {
+  for (let end = 2 + diff; end < 80; end += start) {
     const color = getHexColor("#ff8080", end);
     regexesObj[getSerialDateRegex(today, start, end)] = {
       filterLanguageRegex: "Markdown",
