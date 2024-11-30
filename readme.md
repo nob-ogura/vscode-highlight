@@ -1,5 +1,10 @@
 # Highlight Date
 
+```shell
+docker build -t my-container .
+docker cp my-container:/usr/src/app/vscode-highlight-date-0.0.1.vsix ~/@/git/nob-ogura/vscode-highlight
+```
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/fabiospampinato/vscode-highlight/master/resources/logo.png" width="128" alt="Logo">
 </p>
